@@ -2,27 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flutter WebView Geolocation Example</title>
 </head>
 
 <body>
-    <h5>Location : <p id="locationData">...</p></h5>
-    <button onclick="requestLocation()">Get My Location</button>
-    <script>
-        function requestLocation() {
-          window.flutter.postMessage('requestLocation');
-        }
-        
-        function receiveLocationFromFlutter(locationJson) {
-          // Parse the received JSON data (locationJson) and use the location information
-          const locationData = JSON.parse(locationJson);
-          console.log("Received Location:", locationData);
-          document.getElementById('locationData').innerHTML = locationData.longitude;
-          // You can further process the location data here, e.g., display on a map
-        }
-        </script>        
+  <h5>Location: <p id="locationData">...</p></h5>
+  <button onclick="requestLocation()">Get My Location</button>
+
+  <script>
+    function requestLocation() {
+      if (window.flutter) {
+        window.flutter.postMessage('requestLocation');
+      } else {
+        console.warn("window.flutter is not yet available");
+      }
+    }
+
+    function receiveLocationFromFlutter(locationJson) {
+      try {
+        // Parse the received JSON data
+        const locationData = JSON.parse(locationJson);
+        console.log("Received Location:", locationData);
+
+        // Update location display with latitude and longitude
+        document.getElementById('locationData').innerHTML = `Latitude: ${locationData.latitude}, Longitude: ${locationData.longitude}`;
+      } catch (error) {
+        console.error("Error processing location data:", error);
+        // Handle display of a user-friendly error message
+      }
+    }
+  </script>
 </body>
 
 </html>
