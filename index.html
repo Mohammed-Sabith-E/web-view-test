@@ -8,21 +8,21 @@
 </head>
 
 <body>
-    <h5>Location</h5>
+    <h5>Location : <p id="locationData"></p></h5>
+    <button onclick="requestLocation()">Get My Location</button>
     <script>
-        // JavaScript code in your web view
-        // This function is called when the user wants to request location from Flutter
         function requestLocation() {
-            window.flutter.postMessage('requestLocation');
+          window.flutter.postMessage('requestLocation');
         }
-
-        // This function receives location data from Flutter and processes it
-        window.flutter.receiveLocationFromFlutter = function (locationJson) {
-            // Process locationJson received from Flutter
-            console.log(locationJson);
+        
+        function receiveLocationFromFlutter(locationJson) {
+          // Parse the received JSON data (locationJson) and use the location information
+          const locationData = JSON.parse(locationJson);
+          console.log("Received Location:", locationData);
+          document.getElementById('locationData').innerHTML = locationData;
+          // You can further process the location data here, e.g., display on a map
         }
-
-    </script>
+        </script>        
 </body>
 
 </html>
