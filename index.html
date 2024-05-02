@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h5>Location : <p id="locationData"></p></h5>
+    <h5>Location : <p id="locationData">...</p></h5>
     <button onclick="requestLocation()">Get My Location</button>
     <script>
         function requestLocation() {
@@ -19,7 +19,7 @@
           // Parse the received JSON data (locationJson) and use the location information
           const locationData = JSON.parse(locationJson);
           console.log("Received Location:", locationData);
-          document.getElementById('locationData').innerHTML = locationData;
+          document.getElementById('locationData').innerHTML = locationData.longitude;
           // You can further process the location data here, e.g., display on a map
         }
         </script>        
