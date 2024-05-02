@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h5>Location</h5>
+    <script>
+        // JavaScript code in your web view
+        // This function is called when the user wants to request location from Flutter
+        function requestLocation() {
+            window.flutter.postMessage('requestLocation');
+        }
+
+        // This function receives location data from Flutter and processes it
+        window.flutter.receiveLocationFromFlutter = function (locationJson) {
+            // Process locationJson received from Flutter
+            console.log(locationJson);
+        }
+
+    </script>
+</body>
+
+</html>
